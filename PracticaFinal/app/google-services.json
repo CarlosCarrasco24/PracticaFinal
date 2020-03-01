@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "132914336316",
+    "firebase_url": "https://practicafinal-d5c18.firebaseio.com",
+    "project_id": "practicafinal-d5c18",
+    "storage_bucket": "practicafinal-d5c18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132914336316:android:6745fbaa707e84a9c3a939",
+        "android_client_info": {
+          "package_name": "org.alandalus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132914336316-fe8r5c81pvju5jfg65iqu7fm0qbtdbvn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.alandalus",
+            "certificate_hash": "cb6b41fa4792d7ac3f325f0c4d551c9b82bf2097"
+          }
+        },
+        {
+          "client_id": "132914336316-1jusslvjq5g6uk2le1mu5cp9c05on909.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA-OhpC9_dmpYjIFmetBVLw2IR2BWLnvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132914336316-1jusslvjq5g6uk2le1mu5cp9c05on909.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
