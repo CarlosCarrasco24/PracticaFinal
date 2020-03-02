@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -37,12 +39,15 @@ public class EditActivity extends BaseActivity {
     private EditText etMinutos;
     private Maquinas cargado;
     private ImageView imActividad;
-    private  int foto;
+    private  int foto,numero;
     String nombre;
     List<Maquinas> articulos;
+    public static final String BBDD = "Gimnasio";
+
     public static final String TABLA = "Actividad";
     FirebaseDatabase miBase;
     DatabaseReference miReferencia;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +107,22 @@ public class EditActivity extends BaseActivity {
             etMinutos.setError("Campo necesario");
 
         }else {
+
+            numero=cargarShared();
+            numero++;
+            ClaseConexion miCon=new ClaseConexion(this,BBDD,null,1);
+            SQLiteDatabase base = miCon.getWritableDatabase();
             String nombre=etNombre.getText().toString();
             int minutos=Integer.parseInt(etMinutos.getText().toString());
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt("fila",numero);
+            editor.commit();
+            ContentValues registro=new ContentValues();
+            registro.put("codigo",numero);
+            registro.put("nombre",nombre);
+            registro.put("minutos",minutos);
+            base.insert(ClaseConexion.TABLACONEXION, null, registro);
+            base.close();
             BitmapDrawable drawable = (BitmapDrawable) imActividad.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -115,5 +134,8 @@ public class EditActivity extends BaseActivity {
             Toast.makeText(this, "Añadido", Toast.LENGTH_LONG).show();
         }
     }
-
+    private int cargarShared(){
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        return prefs.getInt("fila",0);
+    }
 }

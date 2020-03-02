@@ -116,6 +116,30 @@
                 android:text="@string/btnDiario" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imvNoInternet"
+                style="@style/botonMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                app:srcCompat="@drawable/ic_signal_cellular_connected_no_internet_0_bar_black_24dp" />
+
+            <Button
+                android:id="@+id/btnNoConexion"
+                style="@style/botonMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:onClick="noConexion"
+                android:text="@string/btnTareaNo" />
+        </TableRow>
+
     </TableLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

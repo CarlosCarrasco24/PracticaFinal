@@ -20,6 +20,7 @@
     <string name="btnTomar">Hacer foto</string>
     <string name="itAbout">About Us...</string>
     <string name="info">App creada por Carlos Carrasco Ureña</string>
+    <string name="btnTareaNo">Ver Tarea\n(Modo sin conexion)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

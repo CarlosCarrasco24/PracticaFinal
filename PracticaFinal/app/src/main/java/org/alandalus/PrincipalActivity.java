@@ -59,6 +59,10 @@ public class PrincipalActivity extends BaseActivity {
         Intent i=new Intent(this,CameraActivity.class);
         startActivity(i);
     }
+    public void noConexion(View v){
+        //Intent i=new Intent(this,noConexionActivity.class);
+        startActivity(i);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
