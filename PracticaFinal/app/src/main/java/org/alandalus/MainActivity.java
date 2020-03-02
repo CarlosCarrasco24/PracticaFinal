@@ -81,6 +81,7 @@ public class MainActivity extends BaseActivity {
                             miUsuario= mAuth.getCurrentUser();
                             Intent i=new Intent(MainActivity.this,PrincipalActivity.class);
                             i.putExtra(MAIL,miUsuario.getEmail());
+                            Log.d("MAIL>>>",miUsuario.getEmail());
                             startActivityForResult(i,REQUEST1);
                         } else {
 

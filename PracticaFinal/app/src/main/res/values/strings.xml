@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PracticaFinal</string>
+    <string name="app_name">Actividad</string>
     <string name="btnRegistrar">Registrarse</string>
     <string name="btnLogin">Login</string>
     <string name="etCorreo">Correo</string>

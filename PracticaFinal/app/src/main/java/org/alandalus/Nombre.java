@@ -17,19 +17,16 @@ public class Nombre extends Fragment {
     TextView t;
     public Nombre() {
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_nombre, container, false);
         t=v.findViewById(R.id.etNombreFrag);
+        if(getArguments()!=null){
+            String mail=getArguments().getString(MainActivity.MAIL);
+            t.setText(mail);
+        }
         return v;
     }
-    public void cambiaNombre(Bundle extras){
-        String mail = extras.getString(MainActivity.MAIL);
-        Log.d("ASdsa>>>>>>>>",mail);
-        t.setText(""+mail);
-    }
-
 }
