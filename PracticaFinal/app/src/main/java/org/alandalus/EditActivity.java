@@ -39,8 +39,7 @@ public class EditActivity extends BaseActivity {
     private EditText etMinutos;
     private Maquinas cargado;
     private ImageView imActividad;
-    private  int foto,numero;
-    String nombre;
+    private int foto, numero;
     List<Maquinas> articulos;
     public static final String BBDD = "Gimnasio";
 
@@ -53,20 +52,22 @@ public class EditActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        Bundle datos=getIntent().getExtras();
+        Bundle datos = getIntent().getExtras();
         FirebaseStorage.getInstance();
-        foto=datos.getInt("image");
+        foto = datos.getInt("image");
         articulos = new ArrayList<>();
         cargarViews();
         cargarDatos();
         iniciarBase();
         listener();
     }
+
     private void iniciarBase() {
         FirebaseApp.initializeApp(this);
         miBase = FirebaseDatabase.getInstance();
         miReferencia = miBase.getReference();
     }
+
     public void listener() {
         miReferencia.child(TABLA).addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,7 +76,6 @@ public class EditActivity extends BaseActivity {
                 for (DataSnapshot sn : dataSnapshot.getChildren()) {
                     Maquinas art = sn.getValue(Maquinas.class);
                     articulos.add(art);
-                    Log.d("ASdDSA", "" + articulos.size());
                 }
             }
 
@@ -85,42 +85,45 @@ public class EditActivity extends BaseActivity {
             }
         });
     }
+
     private void cargarViews() {
 
-        etNombre =    findViewById(R.id.tvActividad);
-        etMinutos =   findViewById(R.id.etMinutos);
-        imActividad=findViewById(R.id.imgActividad);
+        etNombre = findViewById(R.id.tvActividad);
+        etMinutos = findViewById(R.id.etMinutos);
+        imActividad = findViewById(R.id.imgActividad);
     }
-    public void cargarDatos(){
+
+    public void cargarDatos() {
         cargado = (Maquinas) getIntent().getSerializableExtra(Tarea.OBJETO);
         etNombre.setText(cargado.getNombre());
         imActividad.setImageResource(foto);
     }
 
-    public void volver(View v){
-        Intent i =new Intent();
-        setResult(RESULT_OK,i);
-                finish();
+    public void volver(View v) {
+        Intent i = new Intent();
+        setResult(RESULT_OK, i);
+        finish();
     }
-    public void guardar(View v){
-        if(etMinutos.getText().toString().trim().length()==0){
+
+    public void guardar(View v) {
+        if (etMinutos.getText().toString().trim().length() == 0) {
             etMinutos.setError("Campo necesario");
 
-        }else {
-
-            numero=cargarShared();
+        } else {
+            numero = cargarShared();
             numero++;
-            ClaseConexion miCon=new ClaseConexion(this,BBDD,null,1);
+            ClaseConexion miCon = new ClaseConexion(this, BBDD, null, 1);
             SQLiteDatabase base = miCon.getWritableDatabase();
-            String nombre=etNombre.getText().toString();
-            int minutos=Integer.parseInt(etMinutos.getText().toString());
+            String nombre = etNombre.getText().toString();
+            int minutos = Integer.parseInt(etMinutos.getText().toString());
+            pref = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("fila",numero);
+            editor.putInt("fila", numero);
             editor.commit();
-            ContentValues registro=new ContentValues();
-            registro.put("codigo",numero);
-            registro.put("nombre",nombre);
-            registro.put("minutos",minutos);
+            ContentValues registro = new ContentValues();
+            registro.put("codigo", numero);
+            registro.put("nombre", nombre);
+            registro.put("minutos", minutos);
             base.insert(ClaseConexion.TABLACONEXION, null, registro);
             base.close();
             BitmapDrawable drawable = (BitmapDrawable) imActividad.getDrawable();
@@ -129,13 +132,14 @@ public class EditActivity extends BaseActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
             byte[] b = baos.toByteArray();
             String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-            MaquinasV2 p = new MaquinasV2(UUID.randomUUID().toString(), nombre, encodedImage,minutos);
+            MaquinasV2 p = new MaquinasV2(UUID.randomUUID().toString(), nombre, encodedImage, minutos);
             miReferencia.child(TABLA).child(p.getUid()).setValue(p);
             Toast.makeText(this, "Añadido", Toast.LENGTH_LONG).show();
         }
     }
-    private int cargarShared(){
+
+    private int cargarShared() {
         SharedPreferences prefs = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-        return prefs.getInt("fila",0);
+        return prefs.getInt("fila", 0);
     }
 }

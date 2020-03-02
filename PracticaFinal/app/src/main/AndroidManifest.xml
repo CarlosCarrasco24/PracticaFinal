@@ -3,14 +3,17 @@
     package="org.alandalus">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_personal"
@@ -18,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_personal"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".NoConexionActivity"></activity>
+        <activity android:name=".CameraActivity" />
         <activity android:name=".ActividadActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".Tarea" />

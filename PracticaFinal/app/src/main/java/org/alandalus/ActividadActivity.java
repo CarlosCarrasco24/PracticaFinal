@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,7 @@ public class ActividadActivity extends BaseActivity {
         recView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,
                 false));
         listener();
-//        ponerGestos();
+        ponerGestos();
     }
     private void iniciarBase() {
         FirebaseApp.initializeApp(this);
@@ -54,9 +55,7 @@ public class ActividadActivity extends BaseActivity {
                 for (DataSnapshot sn : dataSnapshot.getChildren()) {
                     MaquinasV2 art = sn.getValue(MaquinasV2.class);
                     miLista.add(art);
-                    Log.d("MILISTAENBUCLE>>",""+miLista.size());
                 }
-                Log.d("MILISTAFUERABUCLE>>",""+miLista.size());
                 adapter=new ActividadAdapter(miLista);
                 recView.setAdapter(adapter);
             }
@@ -76,16 +75,22 @@ public class ActividadActivity extends BaseActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                //Cojo la posicion del elemento que he pulsado
                 int pos=viewHolder.getAdapterPosition();
                 MaquinasV2 elemento=miLista.get(pos);
                 if(direction==ItemTouchHelper.LEFT){
+                    for (MaquinasV2 art : miLista) {
+                        if (elemento.getUid().equals(art.getUid())) {
+                            MaquinasV2 p = new MaquinasV2(art.getUid(), art.getNombre(), art.getImagen(), art.getMinutos());
+                            miReferencia.child(EditActivity.TABLA).child(p.getUid()).removeValue();
+                            Toast.makeText(ActividadActivity.this, "Elemento Borrado", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    adapter.notifyItemChanged(pos);
                 }
             }
         };
         ItemTouchHelper ith2 = new ItemTouchHelper(ith);
         ith2.attachToRecyclerView(recView);
-        adapter.notifyDataSetChanged();
     }
 
 }

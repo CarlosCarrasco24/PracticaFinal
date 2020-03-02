@@ -60,7 +60,7 @@ public class PrincipalActivity extends BaseActivity {
         startActivity(i);
     }
     public void noConexion(View v){
-        //Intent i=new Intent(this,noConexionActivity.class);
+        Intent i=new Intent(this,NoConexionActivity.class);
         startActivity(i);
     }
     @Override

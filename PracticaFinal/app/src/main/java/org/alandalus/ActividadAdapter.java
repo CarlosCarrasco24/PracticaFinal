@@ -29,8 +29,8 @@ public class ActividadAdapter extends RecyclerView.Adapter<ActividadAdapter.MiVi
         public MiVistaHolder(@NonNull View itemView) {
             super(itemView);
             tvUID=itemView.findViewById(R.id.tvUID);
-            tvNombre= itemView.findViewById(R.id.tvNombreActividad);
-            tvLugar=itemView.findViewById(R.id.tvLugarActividad);
+            tvNombre= itemView.findViewById(R.id.tvNombreNoConexion);
+            tvLugar=itemView.findViewById(R.id.tvMinutosNoConexion);
             iv=itemView.findViewById(R.id.ivImporActividad);
         }
     }
