@@ -36,7 +36,6 @@ public class MainActivity extends BaseActivity {
     private FirebaseUser miUsuario;
     SignInButton botonG;
     private GoogleSignInClient miCliente;
-    MediaPlayer mp;
 
 
     @Override
@@ -195,36 +194,6 @@ public class MainActivity extends BaseActivity {
         etMail.setText("");
         etPass.setText("");
         etMail.requestFocus();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    if(item.getItemId()==R.id.itAbout) {
-        AlertDialog.Builder informacion = new AlertDialog.Builder(this);
-        informacion.setMessage(R.string.info);
-        informacion.setPositiveButton("Aceptar", null);
-        informacion.show();
-        Log.d("ASD>>","EnALERT");
-    }
-    if(item.getItemId()==R.id.itMusica){
-            mp= MediaPlayer.create(this,R.raw.musica);
-            mp.start();
-            mp.setLooping(true);
-            Log.d("ASD>>","ENCHECKED");
-
-    }
-    if(item.getItemId()==R.id.itNoMusica){
-        mp.stop();
-        Log.d("ASD>>","STOP");
-    }
-        return super.onOptionsItemSelected(item);
     }
 
 }

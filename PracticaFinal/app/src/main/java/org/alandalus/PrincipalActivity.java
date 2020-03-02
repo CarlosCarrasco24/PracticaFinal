@@ -20,8 +20,7 @@ import android.widget.EditText;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PrincipalActivity extends BaseActivity {
-
-    //private Nombre frag;
+    MediaPlayer mp;
     private FloatingActionButton btnFlo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +59,31 @@ public class PrincipalActivity extends BaseActivity {
         Intent i=new Intent(this,CameraActivity.class);
         startActivity(i);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.itAbout) {
+            AlertDialog.Builder informacion = new AlertDialog.Builder(this);
+            informacion.setMessage(R.string.info);
+            informacion.setPositiveButton("Aceptar", null);
+            informacion.show();
+        }
+        if(item.getItemId()==R.id.itMusica){
+            mp= MediaPlayer.create(this,R.raw.musica);
+            mp.start();
+            mp.setLooping(true);
+        }
+        if(item.getItemId()==R.id.itNoMusica){
+            mp.stop();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }
