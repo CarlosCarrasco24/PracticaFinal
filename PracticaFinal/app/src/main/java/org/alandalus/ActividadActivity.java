@@ -87,6 +87,9 @@ public class ActividadActivity extends BaseActivity {
                     }
                     adapter.notifyItemChanged(pos);
                 }
+                if(direction==ItemTouchHelper.RIGHT){
+                    adapter.notifyItemChanged(pos);
+                    }
             }
         };
         ItemTouchHelper ith2 = new ItemTouchHelper(ith);

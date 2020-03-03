@@ -87,11 +87,11 @@ public class CameraActivity extends BaseActivity {
         if(im==false){
             Toast.makeText(CameraActivity.this,"No hay imagen seleccionada",Toast.LENGTH_LONG).show();
         }else {
-            new MyTask().execute(10);
             imagen.buildDrawingCache();
             Bitmap bitmap = imagen.getDrawingCache();
             Guardar savefile = new Guardar();
             savefile.SaveImage(CameraActivity.this, bitmap);
+            //new MyTask().execute(10);
 
         }
     }
@@ -104,7 +104,7 @@ public class CameraActivity extends BaseActivity {
         protected String doInBackground(Integer... params) {
             for (; count <= params[0]; count++) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(0);
                     publishProgress(count);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

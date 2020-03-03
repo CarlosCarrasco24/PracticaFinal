@@ -18,16 +18,16 @@ import java.util.Calendar;
 public class Guardar {
 
     private Context TheThis;
-    private String NameOfFolder = "/Nuevacarpeta";
+    private String NameOfFolder = "Nuevacarpeta";
     private String NameOfFile = "imagen";
 
     public void SaveImage(Context context, Bitmap ImageToSave) {
 
         TheThis = context;
         String CurrentDateAndTime = getCurrentDateAndTime();
-        File mydir = context.getDir("ImagenesApp", Context.MODE_PRIVATE);
+        File mydir = context.getDir(NameOfFolder, Context.MODE_PRIVATE);
+        mydir.mkdirs();
         File file = new File(mydir, NameOfFile + CurrentDateAndTime + ".jpg");
-
         try {
             FileOutputStream fOut = new FileOutputStream(file);
             ImageToSave.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
