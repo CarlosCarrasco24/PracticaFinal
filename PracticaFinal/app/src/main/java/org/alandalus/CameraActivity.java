@@ -91,7 +91,7 @@ public class CameraActivity extends BaseActivity {
             Bitmap bitmap = imagen.getDrawingCache();
             Guardar savefile = new Guardar();
             savefile.SaveImage(CameraActivity.this, bitmap);
-            //new MyTask().execute(10);
+            new MyTask().execute(10);
 
         }
     }
